@@ -25,6 +25,7 @@ This commands includes
 <BR>
 • Other IP Commands e.g. show ip route etc.
 <BR>
+
 ## client.py
 import socket
 
@@ -42,8 +43,34 @@ print("Ping Result:\n")
 print(result)
 
 client.close()
+## output
+<img width="1020" height="317" alt="image" src="https://github.com/user-attachments/assets/977b95ba-5633-4b37-ae6f-59bb3a15e165" />
+## server
+import socket
 
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(("localhost", 5000))
+server.listen(1)
+
+print("Server is waiting for connection...")
+
+conn, addr = server.accept()
+print("Connected by", addr)
+
+website = conn.recv(1024).decode()
+
+print("Client requested to ping:", website)
+
+import os
+result = os.popen("ping " + website).read()
+
+conn.send(result.encode())
+
+conn.close()
+server.close()
 ## Output
+
+<img width="917" height="96" alt="image" src="https://github.com/user-attachments/assets/edcba61a-4d50-4b67-8cba-0dc0a3b017bd" />
 
 ## Result
 Thus Execution of Network commands Performed 
