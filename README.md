@@ -25,6 +25,23 @@ This commands includes
 <BR>
 • Other IP Commands e.g. show ip route etc.
 <BR>
+## client.py
+import socket
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+client.connect(("localhost", 5000))
+
+website = input("Enter website to ping: ")
+
+client.send(website.encode())
+
+result = client.recv(4096).decode()
+
+print("Ping Result:\n")
+print(result)
+
+client.close()
 
 ## Output
 
